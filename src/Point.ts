@@ -1,7 +1,7 @@
 import Snake from "./Snake";
 /** A class that represents a point */
 class Point {
-  /** The x and coordinate of the point */
+  /** Attributes for the x and y coordinates */
   private xcoord: number;
   private ycoord: number;
   /** A constructor for the points */
@@ -9,10 +9,15 @@ class Point {
     this.xcoord = x;
     this.ycoord = y;
   }
-  /** Getters for the x and y coordinates */
+  /** Getters for the x coordinates
+   * @return The x coordinate
+   */
   get x() {
     return this.xcoord;
   }
+  /** Getters for the y coordinates
+   * @return The y coordinate
+   */
   get y() {
     return this.ycoord;
   }

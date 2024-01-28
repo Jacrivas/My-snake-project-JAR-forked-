@@ -16,7 +16,9 @@ class WorldModel {
   public update(steps: number) {
     this._snake.move(steps);
   }
-  /** Method that can be called to get the current position of the snake */
+  /** Method that can be called to get the current position of the snake
+   * @return The current position
+   */
   getSnake() {
     return this._snake;
   }

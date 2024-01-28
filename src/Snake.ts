@@ -46,6 +46,7 @@ class Snake {
   }
   /** A Method that can be called to allow the snake to move regardless of each direction
    * @param {number} moves
+   * @return Updates the current position on the board
    */
 
   move(moves: number) {
@@ -75,7 +76,9 @@ class Snake {
       );
     }
   }
-  /** A Method that can be called to get the current poistion of the snake*/
+  /** A Method that can be called to get the current poistion of the snake
+   * @return The current position
+   */
   public get position() {
     return this.currentPosition;
   }
