@@ -1,56 +1,71 @@
 import Snake from "./Snake";
+import WorldModel from "./Snake";
+import Point from "./Point";
+import display from "./display";
 
-const moveSnakes = (times: number, turn: boolean = false) => {
-  const greenSnake = new Snake("green");
-  const maroonSnake = new Snake("maroon");
-  let totalSquares = 0;
+describe("Snake class tests", () => {
+  let snake: Snake;
 
-  for (let i = 0; i < times; i++) {
-    const numSquares1 = Math.floor(Math.random() * 100);
-    const numSquares2 = Math.floor(Math.random() * 100);
-    greenSnake.move(numSquares1);
-    maroonSnake.move(numSquares2);
-    greenSnake.move(5);
-    totalSquares += numSquares2;
-    if (turn) {
-      const numSquares3 = Math.floor(Math.random() * 100);
-      const numSquares4 = Math.floor(Math.random() * 10);
-      greenSnake.turn();
-      maroonSnake.turn();
-      maroonSnake.move(numSquares3);
-      totalSquares -= numSquares3;
-      greenSnake.move(numSquares3);
-      maroonSnake.turn();
-      maroonSnake.turn();
-      maroonSnake.turn();
-      maroonSnake.move(numSquares4);
-      totalSquares += numSquares4;
-    }
-  }
-
-  return { actual: maroonSnake.position, expected: totalSquares };
-};
-
-describe("Snake Tests", function () {
-  const tests = [0, 3, 10, 4].map((num, index) => moveSnakes(num, index > 2));
-
-  const testDescriptions = [
-    "starts with the correct position of 0",
-    "has the correct position after 3+ random moves",
-    "has the correct position after 10+ random moves",
-    "has the correct position after 4+ random moves with turns",
-  ];
-
-  testDescriptions.forEach((description, index) => {
-    it(description, () =>
-      expect(tests[index].expected).toBe(tests[index].actual),
-    );
+  beforeEach(() => {
+    snake = new Snake("Red");
   });
-});
+  /** Test case that tests */
+  test("initial position is (0,0)", () => {
+    expect(snake.position.x).toBe(0);
+    expect(snake.position.y).toBe(0);
+  });
+  /** Test case that tests the move method in the x axis */
+  test("move right increases x", () => {
+    snake.move(1); // Moves once in the x axis or to the right
+    expect(snake.position.x).toBe(1);
+    expect(snake.position.y).toBe(0);
+  });
+  /** Test case that tests the move method in the y axis */
+  test("move left decreases x", () => {
+    snake.turnLeft(); // Now facing 'Up'
+    snake.move(1);
+    expect(snake.position.x).toBe(0);
+    expect(snake.position.y).toBe(1);
+  });
+  /** Test case that tests the move method in the y axis in order to test negative direction in the y axis */
+  test("move down decreases y", () => {
+    snake.turnRight(); // Now facing 'Down'
+    snake.move(1);
+    expect(snake.position.x).toBe(0);
+    expect(snake.position.y).toBe(-1);
+  });
+  /** Test case that tests the move method in the x axis in order to test poisitive direction in the y numbers */
+  test("move up increases y", () => {
+    snake.turnLeft();
+    snake.move(1);
+    expect(snake.position.x).toBe(0);
+    expect(snake.position.y).toBe(1);
+  });
+  /** Test case that tests to reinforce that turnLeft work */
+  test("turn left changes direction correctly", () => {
+    snake.turnLeft(); // Now facing 'up'
+    snake.move(1);
+    expect(snake.position.x).toBe(0);
+    expect(snake.position.y).toBe(1);
 
-describe("Addition", function () {
-  it("sums numbers", () => {
-    expect(1 + 1).toEqual(2);
+    snake.turnLeft(); // Now facing 'left'
+    snake.move(1);
+    expect(snake.position.x).toBe(-1);
+    expect(snake.position.y).toBe(1);
+
+    snake.turnLeft(); // Now facing 'down'
+    snake.move(1);
+    expect(snake.position.x).toBe(-1);
+    expect(snake.position.y).toBe(0);
+  });
+  /** Test case that tests to reinforce that turnRight works */
+  test("turn right changes direction correctly", () => {
+    snake.turnRight(); // Looking 'Down'
+    snake.move(1);
+    expect(snake.position.y).toBe(-1); // Looking 'Down'
+    snake.turnRight(); // Looking 'Left'
+    snake.move(1);
+    expect(snake.position.x).toBe(-1); // Looking 'Left'
   });
 });
 

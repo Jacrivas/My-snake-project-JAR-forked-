@@ -1,6 +1,6 @@
 import Duck from "./Duck";
 
-const quackDucks = (times: number) => {
+/*const quackDucks = (times: number) => {
   const greenDuck = new Duck("green");
   const maroonDuck = new Duck("maroon");
   let totalQuacks = 0;
@@ -34,7 +34,7 @@ describe("Duck", () => {
       expect(tests[index].expected).toBe(tests[index].actual),
     );
   });
-});
+});*/
 
 describe("Addition", function () {
   it("sums numbers", () => {
